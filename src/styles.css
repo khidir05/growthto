@@ -136,3 +136,9 @@
   50% { transform: translateY(-12px); }
 }
 .animate-float { animation: float 6s ease-in-out infinite; }
+
+@keyframes drift {
+  0% { transform: translateX(-5%); }
+  100% { transform: translateX(5%); }
+}
+.animate-drift { animation: drift 24s ease-in-out infinite alternate; }
