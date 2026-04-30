@@ -1,14 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Navbar } from "@/components/site/Navbar";
 import { Hero } from "@/components/site/Hero";
-import { LogoCloud } from "@/components/site/LogoCloud";
-import { Devices } from "@/components/site/Devices";
-import { FeatureSplit } from "@/components/site/FeatureSplit";
-import { FeatureGrid } from "@/components/site/FeatureGrid";
-import { Testimonials } from "@/components/site/Testimonials";
-import { Pricing } from "@/components/site/Pricing";
-import { Blog } from "@/components/site/Blog";
-import { Community } from "@/components/site/Community";
+import { About } from "@/components/site/About";
+import { Services } from "@/components/site/Services";
 import { CTA } from "@/components/site/CTA";
 import { Footer } from "@/components/site/Footer";
 
@@ -16,10 +10,10 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "Grow To — Immersive AR & Software Studio" },
-      { name: "description", content: "Grow To is an AR and software studio crafting immersive experiences and scalable products for forward-thinking teams." },
-      { property: "og:title", content: "Grow To — Immersive AR & Software Studio" },
-      { property: "og:description", content: "Build AR experiences and ship software like a pro." },
+      { title: "GrowthTo — From concept to reality" },
+      { name: "description", content: "GrowthTo is a small studio offering civil engineering, architecture, AR, web & app development, and graphic design. Tell us about your project." },
+      { property: "og:title", content: "GrowthTo — From concept to reality" },
+      { property: "og:description", content: "Bringing ideas to life — from buildings and brands to digital systems and AR experiences." },
     ],
   }),
 });
@@ -30,15 +24,8 @@ function Index() {
       <Navbar />
       <main>
         <Hero />
-        <LogoCloud />
-        <Devices />
-        <FeatureSplit />
-        <FeatureGrid />
-        <Testimonials />
-        <Pricing />
-        <LogoCloud />
-        <Blog />
-        <Community />
+        <About />
+        <Services />
         <CTA />
       </main>
       <Footer />
