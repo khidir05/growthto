@@ -1,67 +1,75 @@
-import { ArrowRight, Play, Sparkles } from "lucide-react";
-import heroImg from "@/assets/hero-ar.jpg";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
+import skyBg from "@/assets/sky-bg.jpg";
+import dashboard from "@/assets/dashboard-mock.png";
 
 export function Hero() {
-  return (
-    <section id="top" className="relative pt-32 pb-24 overflow-hidden">
-      <div className="absolute inset-0 grid-bg pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-hero pointer-events-none" />
-      <div className="relative mx-auto max-w-7xl px-6">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card/60 backdrop-blur px-3 py-1 text-xs font-medium text-muted-foreground">
-              <Sparkles className="h-3.5 w-3.5 text-primary" />
-              AR · Software · Innovation
-            </span>
-            <h1 className="mt-6 text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground leading-[1.05]">
-              Building <span className="text-gradient-primary">Immersive AR</span> & Software Experiences
-            </h1>
-            <p className="mt-6 text-lg text-muted-foreground max-w-xl leading-relaxed">
-              We help businesses transform ideas into powerful augmented reality and scalable digital solutions — designed for growth.
-            </p>
-            <div className="mt-9 flex flex-wrap gap-3">
-              <a
-                href="#contact"
-                className="group inline-flex items-center gap-2 rounded-full bg-gradient-primary text-primary-foreground px-6 py-3 text-sm font-medium shadow-glow hover:opacity-95 transition"
-              >
-                Get Started
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-              </a>
-              <a
-                href="#work"
-                className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-6 py-3 text-sm font-medium text-foreground hover:bg-secondary transition"
-              >
-                <Play className="h-4 w-4 text-primary" />
-                View Our Work
-              </a>
-            </div>
-            <div className="mt-12 grid grid-cols-3 max-w-md gap-6">
-              {[
-                { k: "50+", v: "Projects" },
-                { k: "20+", v: "Clients" },
-                { k: "8+", v: "Industries" },
-              ].map((s) => (
-                <div key={s.v}>
-                  <div className="text-2xl font-bold text-foreground">{s.k}</div>
-                  <div className="text-xs uppercase tracking-wider text-muted-foreground">{s.v}</div>
-                </div>
-              ))}
-            </div>
-          </div>
+  const ref = useRef<HTMLElement>(null);
+  const { scrollY } = useScroll();
+  const skyY = useTransform(scrollY, [0, 800], [0, 200]);
+  const cloudLeftX = useTransform(scrollY, [0, 800], [0, -120]);
+  const cloudRightX = useTransform(scrollY, [0, 800], [0, 120]);
+  const dashY = useTransform(scrollY, [0, 800], [0, -80]);
+  const titleY = useTransform(scrollY, [0, 600], [0, -40]);
 
-          <div className="relative animate-float">
-            <div className="absolute -inset-6 bg-gradient-primary opacity-20 blur-3xl rounded-full" />
-            <div className="relative rounded-3xl overflow-hidden border border-border shadow-card bg-dark">
-              <img
-                src={heroImg}
-                alt="Augmented reality interface visualization"
-                width={1536}
-                height={1280}
-                className="w-full h-auto"
-              />
-            </div>
+  return (
+    <section ref={ref} id="top" className="relative pt-32 pb-32 overflow-hidden">
+      <motion.div
+        style={{ y: skyY, backgroundImage: `url(${skyBg})` }}
+        className="absolute inset-0 -top-20 bg-cover bg-center"
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background" />
+
+      {/* Floating clouds */}
+      <motion.div
+        style={{ x: cloudLeftX }}
+        className="absolute left-0 top-32 w-48 h-24 bg-white/80 rounded-full blur-2xl opacity-90 animate-drift"
+      />
+      <motion.div
+        style={{ x: cloudRightX }}
+        className="absolute right-0 top-48 w-64 h-28 bg-white/70 rounded-full blur-3xl opacity-80 animate-drift"
+      />
+      <motion.div
+        style={{ x: cloudLeftX }}
+        className="absolute left-1/4 top-[420px] w-40 h-20 bg-white/60 rounded-full blur-2xl opacity-70"
+      />
+
+      <div className="relative mx-auto max-w-7xl px-6">
+        <motion.div style={{ y: titleY }} className="text-center max-w-4xl mx-auto">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground leading-[1.05]">
+            Build immersive AR <br /> experiences like a pro
+          </h1>
+          <p className="mt-6 text-base md:text-lg text-foreground/70 max-w-2xl mx-auto leading-relaxed">
+            All-in-one studio for crafting AR products and scalable software — from first prototype to production launch, Grow To has your back.
+          </p>
+          <div className="mt-9 flex items-center justify-center gap-5">
+            <a
+              href="#contact"
+              className="inline-flex items-center rounded-full bg-foreground text-background px-6 py-3 text-sm font-medium hover:opacity-90 transition"
+            >
+              Try Grow To free
+            </a>
+            <a href="#features" className="text-sm font-medium text-foreground/80 hover:text-foreground transition story-link">
+              See features
+            </a>
           </div>
-        </div>
+        </motion.div>
+
+        <motion.div
+          style={{ y: dashY }}
+          className="relative mt-16 mx-auto max-w-5xl"
+        >
+          <div className="absolute -inset-10 bg-gradient-primary opacity-15 blur-3xl rounded-full" />
+          <div className="relative rounded-3xl overflow-hidden border border-white/40 shadow-card bg-white/30 backdrop-blur-sm">
+            <img
+              src={dashboard}
+              alt="Grow To AR studio dashboard"
+              width={1536}
+              height={1024}
+              className="w-full h-auto"
+            />
+          </div>
+        </motion.div>
       </div>
     </section>
   );
