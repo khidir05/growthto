@@ -1,10 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Navbar } from "@/components/site/Navbar";
 import { Hero } from "@/components/site/Hero";
-import { Services } from "@/components/site/Services";
-import { WhyUs } from "@/components/site/WhyUs";
-import { Portfolio } from "@/components/site/Portfolio";
-import { Process } from "@/components/site/Process";
+import { LogoCloud } from "@/components/site/LogoCloud";
+import { Devices } from "@/components/site/Devices";
+import { FeatureSplit } from "@/components/site/FeatureSplit";
+import { FeatureGrid } from "@/components/site/FeatureGrid";
+import { Testimonials } from "@/components/site/Testimonials";
+import { Pricing } from "@/components/site/Pricing";
+import { Blog } from "@/components/site/Blog";
+import { Community } from "@/components/site/Community";
 import { CTA } from "@/components/site/CTA";
 import { Footer } from "@/components/site/Footer";
 
@@ -12,13 +16,10 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "Grow To — Immersive AR & Software Development" },
-      {
-        name: "description",
-        content: "Grow To is a software house building immersive AR experiences and scalable software for forward-thinking businesses.",
-      },
-      { property: "og:title", content: "Grow To — Immersive AR & Software Development" },
-      { property: "og:description", content: "We turn ideas into powerful AR and scalable digital solutions." },
+      { title: "Grow To — Immersive AR & Software Studio" },
+      { name: "description", content: "Grow To is an AR and software studio crafting immersive experiences and scalable products for forward-thinking teams." },
+      { property: "og:title", content: "Grow To — Immersive AR & Software Studio" },
+      { property: "og:description", content: "Build AR experiences and ship software like a pro." },
     ],
   }),
 });
@@ -29,10 +30,15 @@ function Index() {
       <Navbar />
       <main>
         <Hero />
-        <Services />
-        <WhyUs />
-        <Portfolio />
-        <Process />
+        <LogoCloud />
+        <Devices />
+        <FeatureSplit />
+        <FeatureGrid />
+        <Testimonials />
+        <Pricing />
+        <LogoCloud />
+        <Blog />
+        <Community />
         <CTA />
       </main>
       <Footer />
