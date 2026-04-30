@@ -57,22 +57,31 @@ function ServiceGrid({ scrollYProgress }: { scrollYProgress: import("framer-moti
   const y3 = useTransform(scrollYProgress, [0, 1], [140, -100]);
   const ys = [y0, y1, y2, y3];
   return (
-    <div className="mt-16 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div className="mt-16 grid sm:grid-cols-2 lg:grid-cols-4 gap-6" style={{ perspective: "1200px" }}>
       {services.map((s, i) => (
         <motion.div
           key={s.title}
           style={{ y: ys[i] }}
-          whileHover={{ y: -8, transition: { duration: 0.3 } }}
-          className="group rounded-3xl bg-card border border-border p-7 shadow-soft hover:shadow-card transition-shadow relative overflow-hidden"
+          initial={{ rotateX: 0, rotateY: 0 }}
+          whileHover={{ 
+            y: -15, 
+            rotateX: i % 2 === 0 ? 5 : -5, 
+            rotateY: i % 2 === 0 ? -5 : 5,
+            scale: 1.05,
+            transition: { type: "spring", stiffness: 300, damping: 20 } 
+          }}
+          className="group rounded-3xl bg-card border border-border p-7 shadow-soft hover:shadow-card relative overflow-hidden cursor-pointer"
         >
-                <div className="absolute -top-12 -right-12 h-32 w-32 rounded-full bg-gradient-primary opacity-0 group-hover:opacity-20 blur-2xl transition-opacity duration-500" />
-                <div className="h-12 w-12 rounded-xl bg-gradient-primary grid place-items-center shadow-glow">
-                  <s.icon className="h-5 w-5 text-primary-foreground" />
-                </div>
-                <h3 className="mt-6 text-lg font-semibold text-foreground">{s.title}</h3>
-                <p className="mt-3 text-sm text-foreground/70 leading-relaxed">{s.desc}</p>
-                <div className="mt-6 h-px w-full bg-border" />
-                <p className="mt-4 text-xs uppercase tracking-widest text-primary font-semibold">0{i + 1}</p>
+          <div style={{ transform: "translateZ(30px)", transformStyle: "preserve-3d" }}>
+            <div className="absolute -top-12 -right-12 h-32 w-32 rounded-full bg-gradient-primary opacity-0 group-hover:opacity-20 blur-2xl transition-opacity duration-500" />
+            <div className="h-12 w-12 rounded-xl bg-gradient-primary grid place-items-center shadow-glow">
+              <s.icon className="h-5 w-5 text-primary-foreground" />
+            </div>
+            <h3 className="mt-6 text-lg font-semibold text-foreground">{s.title}</h3>
+            <p className="mt-3 text-sm text-foreground/70 leading-relaxed">{s.desc}</p>
+            <div className="mt-6 h-px w-full bg-border" />
+            <p className="mt-4 text-xs uppercase tracking-widest text-primary font-semibold">0{i + 1}</p>
+          </div>
         </motion.div>
       ))}
     </div>

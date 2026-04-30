@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import aboutImg from "@/assets/about_3d.png";
 
 export function About() {
   const ref = useRef<HTMLDivElement>(null);
@@ -32,16 +33,45 @@ export function About() {
           </div>
         </motion.div>
 
-        <motion.div style={{ y: yRight }} className="grid grid-cols-2 gap-4">
-          <div className="aspect-square rounded-3xl bg-gradient-primary shadow-card" />
-          <div className="aspect-square rounded-3xl bg-card border border-border shadow-soft mt-12 grid place-items-center p-6 text-center">
-            <p className="text-sm text-foreground/70 italic">"Growing with your projects."</p>
-          </div>
-          <div className="aspect-square rounded-3xl bg-dark text-dark-foreground p-6 flex flex-col justify-end shadow-card">
-            <p className="text-xs uppercase tracking-widest opacity-70">Studio</p>
-            <p className="mt-1 text-lg font-semibold">GrowthTo</p>
-          </div>
-          <div className="aspect-square rounded-3xl bg-accent shadow-soft mt-12" />
+        <motion.div style={{ y: yRight, perspective: "1000px" }} className="grid grid-cols-2 gap-4">
+          <motion.div
+            initial={{ rotateY: 15, rotateX: 15 }}
+            whileHover={{ scale: 1.05, rotateY: 0, rotateX: 0 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            className="aspect-square rounded-3xl bg-gradient-primary shadow-card overflow-hidden"
+          >
+            <img src={aboutImg} className="w-full h-full object-cover mix-blend-overlay opacity-60 hover:scale-110 transition-transform duration-500" alt="About Studio" />
+          </motion.div>
+          
+          <motion.div
+            initial={{ rotateY: -15, rotateX: 15 }}
+            whileHover={{ scale: 1.05, rotateY: 0, rotateX: 0 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            className="aspect-square rounded-3xl bg-card border border-border shadow-soft mt-12 grid place-items-center p-6 text-center"
+          >
+            <p className="text-sm text-foreground/70 italic" style={{ transform: "translateZ(30px)" }}>"Growing with your projects."</p>
+          </motion.div>
+          
+          <motion.div
+            initial={{ rotateY: 15, rotateX: -15 }}
+            whileHover={{ scale: 1.05, rotateY: 0, rotateX: 0 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            className="aspect-square rounded-3xl bg-dark text-dark-foreground p-6 flex flex-col justify-end shadow-card"
+          >
+            <div style={{ transform: "translateZ(40px)" }}>
+              <p className="text-xs uppercase tracking-widest opacity-70">Studio</p>
+              <p className="mt-1 text-lg font-semibold">GrowthTo</p>
+            </div>
+          </motion.div>
+          
+          <motion.div
+            initial={{ rotateY: -15, rotateX: -15 }}
+            whileHover={{ scale: 1.05, rotateY: 0, rotateX: 0 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            className="aspect-square rounded-3xl shadow-soft mt-12 overflow-hidden border border-border/50"
+          >
+            <img src={aboutImg} className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" alt="About 3D" />
+          </motion.div>
         </motion.div>
       </div>
     </section>
