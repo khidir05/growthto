@@ -44,16 +44,27 @@ export function Services() {
           </p>
         </motion.div>
 
-        <div className="mt-16 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {services.map((s, i) => {
-            const yCard = useTransform(scrollYProgress, [0, 1], [80 + i * 20, -40 - i * 20]);
-            return (
-              <motion.div
-                key={s.title}
-                style={{ y: yCard }}
-                whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                className="group rounded-3xl bg-card border border-border p-7 shadow-soft hover:shadow-card transition-shadow relative overflow-hidden"
-              >
+        <ServiceGrid scrollYProgress={scrollYProgress} />
+      </div>
+    </section>
+  );
+}
+
+function ServiceGrid({ scrollYProgress }: { scrollYProgress: import("framer-motion").MotionValue<number> }) {
+  const y0 = useTransform(scrollYProgress, [0, 1], [80, -40]);
+  const y1 = useTransform(scrollYProgress, [0, 1], [120, -80]);
+  const y2 = useTransform(scrollYProgress, [0, 1], [60, -20]);
+  const y3 = useTransform(scrollYProgress, [0, 1], [140, -100]);
+  const ys = [y0, y1, y2, y3];
+  return (
+    <div className="mt-16 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {services.map((s, i) => (
+        <motion.div
+          key={s.title}
+          style={{ y: ys[i] }}
+          whileHover={{ y: -8, transition: { duration: 0.3 } }}
+          className="group rounded-3xl bg-card border border-border p-7 shadow-soft hover:shadow-card transition-shadow relative overflow-hidden"
+        >
                 <div className="absolute -top-12 -right-12 h-32 w-32 rounded-full bg-gradient-primary opacity-0 group-hover:opacity-20 blur-2xl transition-opacity duration-500" />
                 <div className="h-12 w-12 rounded-xl bg-gradient-primary grid place-items-center shadow-glow">
                   <s.icon className="h-5 w-5 text-primary-foreground" />
@@ -62,11 +73,8 @@ export function Services() {
                 <p className="mt-3 text-sm text-foreground/70 leading-relaxed">{s.desc}</p>
                 <div className="mt-6 h-px w-full bg-border" />
                 <p className="mt-4 text-xs uppercase tracking-widest text-primary font-semibold">0{i + 1}</p>
-              </motion.div>
-            );
-          })}
-        </div>
-      </div>
-    </section>
+        </motion.div>
+      ))}
+    </div>
   );
 }
