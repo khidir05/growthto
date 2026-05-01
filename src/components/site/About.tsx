@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import aboutImg from "@/assets/about_3d.png";
+import logoImg from "@/assets/logo/logo.png";
 
 export function About() {
   const ref = useRef<HTMLDivElement>(null);
@@ -17,9 +18,9 @@ export function About() {
             A small studio, taking every project seriously.
           </h2>
           <p className="mt-6 text-base text-foreground/70 leading-relaxed">
-            GrowthTo is still growing — and that's our advantage. From civil engineering and
+            GrowthTo is still growing and that's our advantage. From civil engineering and
             architecture, to web and application development, augmented reality experiences,
-            and graphic design — each project is a chance to learn and create something meaningful.
+            and graphic design each project is a chance to learn and create something meaningful.
           </p>
           <div className="mt-8 grid grid-cols-2 gap-4">
             <div className="rounded-2xl bg-secondary p-4">
@@ -34,6 +35,7 @@ export function About() {
         </motion.div>
 
         <motion.div style={{ y: yRight, perspective: "1000px" }} className="grid grid-cols-2 gap-4">
+          {/* Card 1: Gambar */}
           <motion.div
             initial={{ rotateY: 15, rotateX: 15 }}
             whileHover={{ scale: 1.05, rotateY: 0, rotateX: 0 }}
@@ -42,28 +44,34 @@ export function About() {
           >
             <img src={aboutImg} className="w-full h-full object-cover mix-blend-overlay opacity-60 hover:scale-110 transition-transform duration-500" alt="About Studio" />
           </motion.div>
-          
+
+          {/* Card 2: Growing with your projects (Sekarang bg-dark) */}
           <motion.div
             initial={{ rotateY: -15, rotateX: 15 }}
             whileHover={{ scale: 1.05, rotateY: 0, rotateX: 0 }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            className="aspect-square rounded-3xl bg-card border border-border shadow-soft mt-12 grid place-items-center p-6 text-center"
+            className="aspect-square rounded-3xl bg-dark text-dark-foreground shadow-soft mt-12 grid place-items-center p-6 text-center"
           >
-            <p className="text-sm text-foreground/70 italic" style={{ transform: "translateZ(30px)" }}>"Growing with your projects."</p>
+            <p className="text-sm italic opacity-80" style={{ transform: "translateZ(30px)" }}>"Growing with your projects."</p>
           </motion.div>
-          
+
+          {/* Card 3: GrowthTo Logo (Sekarang bg-card) */}
           <motion.div
             initial={{ rotateY: 15, rotateX: -15 }}
             whileHover={{ scale: 1.05, rotateY: 0, rotateX: 0 }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            className="aspect-square rounded-3xl bg-dark text-dark-foreground p-6 flex flex-col justify-end shadow-card"
+            className="aspect-square rounded-3xl bg-card border border-border p-6 flex flex-col justify-center items-center shadow-card"
           >
-            <div style={{ transform: "translateZ(40px)" }}>
-              <p className="text-xs uppercase tracking-widest opacity-70">Studio</p>
-              <p className="mt-1 text-lg font-semibold">GrowthTo</p>
+            <div style={{ transform: "translateZ(40px)" }} className="flex flex-col items-center text-center w-full">
+              <img src={logoImg} alt="GrowthTo Logo" className="w-full h-auto max-w-[160px] mb-3 object-contain" />
+              <p className="font-montserrat text-3xl font-bold tracking-tight">
+                <span style={{ color: '#000000' }}>Growth</span>
+                <span style={{ color: '#ba782a' }}>To</span>
+              </p>
             </div>
           </motion.div>
-          
+
+          {/* Card 4: Gambar */}
           <motion.div
             initial={{ rotateY: -15, rotateX: -15 }}
             whileHover={{ scale: 1.05, rotateY: 0, rotateX: 0 }}
